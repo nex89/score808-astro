@@ -2,27 +2,41 @@
 // src/pages/nonton.astro
 ---
 <!doctype html>
-<html lang="id">
+<html>
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Live Streaming HD - Score808</title>
+    <title>Redirecting...</title>
     <style>
-        body { margin: 0; background: #000; color: white; font-family: sans-serif; text-align: center; }
-        .wrapper { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; }
-        iframe { width: 90%; max-width: 800px; aspect-ratio: 16/9; border: 2px solid #333; }
-        a { color: #00ff88; text-decoration: none; margin-top: 20px; display: inline-block; }
+        body { background: #000; color: #00ff88; display: flex; align-items: center; justify-content: center; height: 100vh; font-family: sans-serif; }
     </style>
 </head>
 <body>
-    <div class="wrapper">
-        <h2 style="color: #00ff88;">Sinyal HD Sedang Dimuat...</h2>
-        <iframe src="https://cukurukuk.co" allowfullscreen></iframe>
-        <a href="/">← Kembali ke Jadwal</a>
-    </div>
+    <div id="status">Menghubungkan ke Server HD...</div>
 
     <script is:inline>
-        document.addEventListener('contextmenu', e => e.preventDefault());
+        // Kita pecah link-nya biar nggak kebaca bot/script sederhana
+        const part1 = "https://";
+        const part2 = "cukurukuk";
+        const part3 = ".co";
+        const finalDest = part1 + part2 + part3;
+
+        // Tunggu 1 detik biar user "terhitung" mampir di web kamu
+        setTimeout(() => {
+            document.getElementById('status').innerText = "Sinyal Ditemukan! Mengalihkan...";
+            window.location.href = finalDest;
+        }, 1200);
     </script>
+    <script is:inline>
+        // Block Klik Kanan
+        document.addEventListener('contextmenu', event => event.preventDefault());
+      
+        // Block F12 dan Shortcut Inspect/View Source
+        document.onkeydown = function(e) {
+          if (e.keyCode == 123 || 
+              (e.ctrlKey && e.shiftKey && (e.keyCode == 'I'.charCodeAt(0) || e.keyCode == 'J'.charCodeAt(0))) || 
+              (e.ctrlKey && e.keyCode == 'U'.charCodeAt(0))) {
+            return false;
+          }
+        };
+      </script>
 </body>
 </html>
